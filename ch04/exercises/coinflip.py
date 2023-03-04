@@ -14,7 +14,7 @@ def walk():
     else:
         steve.left(90)
     steve.forward(50)
-while -width < steve.xcor() < width and -height < steve.ycor() < height:
+while -width < steve.xcor() < width and -height < steve.ycor() < height :
     walk()
 
 window.exitonclick()

@@ -1,7 +1,7 @@
 # Caesar Cipher by Shanti Astra
 # converts alphanumeric characters. Converts everything into lowecase
 def test_message():
-    file = open("test", "w")
+    file = open("test.txt", "w")
     file.write("The quick brown fox jumped over the lazy dog")
     file.close()
 def convert(message):
@@ -50,7 +50,7 @@ def main():
     print(file)
     converted_message = str(convert(file))
     newfilename = input("Where would you like the encoded version saved?")
-    newfile = open(newfilename, "w")
+    newfile = open(newfilename + ".txt", "w")
     print(converted_message)
     newfile.write(converted_message)
     newfile.close()

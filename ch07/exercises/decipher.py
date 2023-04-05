@@ -1,12 +1,6 @@
-# Caesar Cipher by Shanti Astra
-# converts alphanumeric characters. Converts everything into lowecase
-def test_message():
-    file = open("test.txt", "w")
-    file.write("The quick brown fox jumped over the lazy dog")
-    file.close()
 def convert(message):
     newmessage = ""
-    keycodes = {"a":"f", "A":"F",
+    encodes = {"a":"f", "A":"F",
                 "b":"y", "B":"Y",
                 "c":"i", "C":"I",
                 "d":"e", "D":"E",
@@ -38,8 +32,9 @@ def convert(message):
                 "7":"Q", "8":"v",
                 "9":"U", "0":"V",
                 " ":" "}
+    decodes = {value:key for key, value in encodes.items()}
     for i in message:
-        newmessage = newmessage + keycodes[i]
+        newmessage = newmessage + decodes[i]
     return newmessage
 
 def main():
@@ -54,5 +49,4 @@ def main():
     print(converted_message)
     newfile.write(converted_message)
     newfile.close()
-test_message()
 main()

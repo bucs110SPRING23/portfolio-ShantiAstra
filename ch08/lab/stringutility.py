@@ -35,8 +35,24 @@ class StringUtility:
         for each character, shift it forwards in the alphabet by a number equal to the length of the string. 
         Uppercase and lowercase ends of the alphabet wrap to the beginning of the alphabet in the same case
         """
-        # !!! get some chars to wrap more times than others within the same string dependent on their individual ord - be careful to keep upper and lowercase seperate
-        return "".join([chr(neword) if 64 < (neword := ord(i)+len(self.string)) < 91 and 64 < ord(i) < 91 or 96 < neword < 123 and 96 < ord(i) < 123 else chr(neword-(26 * (len(self.string)//26 + 1))) if (64 < ord(i) < 91 or 96 < ord(i) < 123) else i for i in self.string])
-
+        # non-looping characters are returned as-is instead of ciphered, while looped characters turn weird
+        #return "".join([chr((ord(i)+len(self.string)) - (26* len(self.string)//26)) if ((len(self.string)%26 + ord(i)- (96 if i.islower() else 64) < 27) and (i.isalpha())) else (chr((ord(i)+len(self.string))-(26*((len(self.string)//26)+1))) if i.isalpha() else i) for i in self.string])
+        
+        # !!! This one works and seems to be doing the same thing as the second line above????
+        
+        list_of_chars = []
+        for i in self.string:
+            if i.isalpha():
+                neword = ord(i) + len(self.string)
+                if len(self.string)%26 + ord(i)- (96 if i.islower() else 64) < 27:
+                    loops = len(self.string)//26
+                else:
+                    loops = len(self.string)//26 +1
+                newchar= chr(neword - 26 * loops)
+                list_of_chars.append(newchar)
+            else:
+                list_of_chars.append(i)
+        result = "".join(list_of_chars)
+        return result 
 
             

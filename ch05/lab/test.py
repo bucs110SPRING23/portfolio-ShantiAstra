@@ -34,41 +34,41 @@ def graph_coordinates(objs_in_sequence):
     using pygame, connects them with a line, and displays the max iterations.
     Arguments: takes a dictionary
     """
+    xpos = 0
+    ypos = 0
     max_so_far = 0
     font_type = None
     font_size = 30
-    scale = 30
+    scale = 10
     dot_size = 2
-    screen = pygame.display.get_surface()
-    maxwidth, maxheight = screen.get_size()
-    xpos = 0
-    ypos = maxheight -100
+    #maxheight, maxwidth = pygame.display.get_window_size
     for num in objs_in_sequence:
         coord = (xpos, ypos)
-        xpos = num *scale
-        ypos = maxheight -100 - objs_in_sequence[num] *scale
+        screen = pygame.display.get_surface()
+        xpos = num #*scale
+        ypos = objs_in_sequence[num] #*scale
         if objs_in_sequence[num] > max_so_far:
             max_so_far = objs_in_sequence[num]
         pygame.draw.line(screen, "black", coord, (xpos,ypos))
         pygame.draw.circle(screen, "black", (xpos,ypos), dot_size)
         pygame.display.flip()
-    # new_display = pygame.transform.flip(screen, False, True)
-    # width, height = new_display.get_size()
-    # new_display = pygame.transform.scale(new_display, (width * scale, height * scale))
+    # new_display = pygame.display.set_mode((1000, 1000))
+    width, height = screen.get_size()
+    new_display = pygame.transform.scale(screen, (width * scale, height * scale))
     font = pygame.font.Font(font_type, font_size)
     message = font.render("The maximum number of 3n+1 iterations in this range is " + str(max_so_far), True, "black")
     #pygame.display.flip()
     # screen.blit(new_display, (0, 0))
-    screen.blit(message, (10, 10))
+    new_display.blit(message, (10, 10))
     pygame.display.flip()
     pygame.time.wait(5000)
 def main():
     upper_limit = int(input("How high would you like to check the 3n+1 iterations of?"))
     #start up pygame
     pygame.init()
-    screen = pygame.display.set_mode()    
+    screen = pygame.display.set_mode((100, 100))    
     screen.fill("green")
-    pygame.display.flip()
-    pygame.time.wait(500) 
+    # pygame.display.flip()
+    # pygame.time.wait(500) 
     graph_coordinates(threenp1range(upper_limit))      
 main()

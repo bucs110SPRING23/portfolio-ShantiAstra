@@ -1,4 +1,5 @@
 import requests
+import json
 class Library_Search:
     def __init__(self, book):
         """
@@ -14,12 +15,12 @@ class Library_Search:
         """
         
         params = {
-            "search":self.book["title"],
+            #"search":str(input("What keyword do you want to use to find a library?")),
             "limit":10
             }
         result = requests.get(self.url, params = params)
         print(result)
         #!!! get library names printed somehow
-        print(result.results)
+        #print(results[result].name)
         # for library in result:
         #     print(library["name"])

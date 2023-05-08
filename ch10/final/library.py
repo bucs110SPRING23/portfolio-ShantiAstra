@@ -1,11 +1,11 @@
 import requests
-from urllib.request import urlopen
+#from urllib.request import urlopen
 import random
 import json
 class Library:
     def __init__(self):
         """
-        initiate the book class
+        initiate the library class
         """
         self.url = "https://gutendex.com/books"
         self.reading_list = []
@@ -23,12 +23,18 @@ class Library:
         """
         Copy a saved reading list into self.reading_list
         """
-        file_name = input("What is the name of your reading list?")
-        self.reading_list = json.load(open(file_name))
+        file_name = "your_reading_list.txt"
+        openfile = open(file_name)
+        self.reading_list = json.load(openfile)
+        #self.reading_list = file.split("\n")
+        #!!!
+        print(self.reading_list)
+        openfile.close()
     
     def random_book(self):
         """
         Get a dictionary describing a random book available on the Project Gutenberg website
+        return: the dictionary describing the book
         """
         list_of_books = self.get()
         num_books = len(list_of_books)
@@ -62,16 +68,22 @@ class Library:
     
     def find_url(self, book_to_find):
         """
-        returns the url for a plain text version of the book
+        returns the url for a plain text version of the book, if it has one
+        args: the dictionary that describes the book to be found
+        return: the url, if one exists
         """
-        #!!! not all books have a plain text version
         links = book_to_find["formats"]
-        url = links["text/plain"]
-        return url
+        url = links.get("text/plain")
+        if url == None:
+            print("This book is not available in the plain text format. Please go to the Project Gutenberg website to find another version")
+        else:
+            return url
     
     def full_text(self, book_to_find):
         """
         returns the full plain text of a book
+        args: the dictionary describing the book
+        return: the full text of the book as a string
         """
         #!!! has some strange \r and \n marks
         url = self.find_url(book_to_find)
@@ -82,6 +94,7 @@ class Library:
     def already_read(self, read_book):
         """
         removes a book from the reading list
+        args: the dictionary describing the book to be removed
         """
         self.reading_list.remove(read_book)
         

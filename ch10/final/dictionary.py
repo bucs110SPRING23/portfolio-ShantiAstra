@@ -5,7 +5,14 @@ class Dictionary:
         """
         initialize a dictionary object
         """
+        self.word = word
         self.url = "https://api.dictionaryapi.dev/api/v2/entries/en/"+str(word)
+
+    def __str__(self):
+        """
+        returns a string that describes the dictionary instance
+        """
+        return f'This is a dictionary proxy class to look up the word {self.word} from the api at {self.url}'
 
     def get(self):
         """

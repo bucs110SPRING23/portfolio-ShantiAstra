@@ -7,8 +7,13 @@ class Library:
         initiate the library class
         """
         self.url = "https://gutendex.com/books"
-        self.reading_list = []
 
+    def __str__(self):
+        """
+        returns a string describing the library
+        """
+        return f'This is a api proxy class that gets data from {self.url}'
+    
     def get(self):
         """
         Get the entire list of books on the Project Gutenberg website

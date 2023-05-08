@@ -13,6 +13,12 @@ class Reading_list:
             self.reading_list = []
         print("")
         self.name = name
+
+    def __str__(self):
+        """
+        returns a string describing the class instance
+        """
+        return f'This is a reading list called {self.name} that currently includes {self.reading_list}'
     
     def view_list(self):
         """
